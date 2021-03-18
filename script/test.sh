@@ -5,10 +5,10 @@ rm -rf .test
 echo ""
 echo "Compiling the project..."
 yarn -s build
-mv dist .test
 
 echo ""
 echo "Compiling the project with its own build..."
+mv dist .test
 ./.test/cjs/index.js
 
 echo ""

@@ -13,4 +13,6 @@ echo "Compiling the project with its own build..."
 
 echo ""
 echo "Diffing the builds..."
+
+echo ""
 diff --brief --recursive .test dist && echo "The builds are identical. The project builds itself correctly." || echo "The project does not build itself correctly."

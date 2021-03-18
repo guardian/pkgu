@@ -4,7 +4,7 @@ rm -rf .test
 
 echo ""
 echo "Compiling the project..."
-yarn build
+yarn -s build
 mv dist .test
 
 echo ""

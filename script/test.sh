@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
+rm -rf .test
+
 echo ""
 echo "Compiling the project..."
-rm -rf .test
 yarn build
 mv dist .test
 

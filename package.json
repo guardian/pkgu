@@ -9,7 +9,8 @@
   "bin": "dist/cjs/index.js",
   "scripts": {
     "build": "rm -rf dist && ts-node src/index.ts",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "./script/test.sh"
   },
   "prettier": "@guardian/prettier",
   "dependencies": {

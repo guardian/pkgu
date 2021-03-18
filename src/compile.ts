@@ -4,42 +4,42 @@ import { info } from './utils/log';
 
 const { projectRoot } = getUserFiles();
 
+const defaultConfig = {
+	project: projectRoot,
+	declaration: true,
+	declarationDir: 'dist/types',
+	declarationMap: true,
+	emitDeclarationOnly: false,
+	noEmit: false,
+};
+
 const tsc = (opts: Record<string, unknown>) =>
-	execa('tsc', [
-		'--project',
-		projectRoot,
-		'--noEmit',
-		'false',
-		'--emitDeclarationOnly',
-		'false',
-		...Object.entries(opts).flatMap(([opt, val]) => [
+	execa(
+		'tsc',
+		Object.entries({ ...defaultConfig, ...opts }).flatMap(([opt, val]) => [
 			`--${opt}`,
 			String(val),
 		]),
-	]);
+	);
 
 export const compile = () => {
 	info('Compiling source code');
 
 	return Promise.all([
 		tsc({
+			module: 'ES2020',
+			target: 'ES2020',
+			outDir: 'dist/esm',
+		}),
+		tsc({
 			module: 'commonjs',
 			target: 'ES2018',
 			outDir: 'dist/cjs',
 
-			// make sure we override everything that
-			// could have been set in the project config
+			// no point building these again
 			declaration: false,
 			declarationDir: null,
 			declarationMap: false,
-		}),
-		tsc({
-			module: 'ES2020',
-			target: 'ES2015',
-			outDir: 'dist/esm',
-			declaration: true,
-			declarationDir: 'dist/types',
-			declarationMap: true,
 		}),
 	]);
 };

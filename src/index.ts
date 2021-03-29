@@ -24,7 +24,6 @@ app.command('build')
 			{
 				title: 'Check for updates',
 				task: () => updateCheck(),
-				skip: () => 'not published yet',
 			},
 			{
 				title: 'Verify package.json',

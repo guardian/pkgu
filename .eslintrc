@@ -1,8 +1,14 @@
 {
-	"extends": "@guardian/eslint-config-typescript",
+	"extends": "@guardian/eslint-config",
 	"ignorePatterns": ["dist"],
-	"rules": {
-		"@typescript-eslint/no-var-requires": "off",
-		"@typescript-eslint/explicit-module-boundary-types": "off"
-	}
+	"overrides": [
+		{
+			"files": ["*.ts"],
+			"extends": "@guardian/eslint-config-typescript",
+			"rules": {
+				"@typescript-eslint/no-var-requires": "off",
+				"@typescript-eslint/explicit-module-boundary-types": "off"
+			}
+		}
+	]
 }

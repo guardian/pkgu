@@ -1,5 +1,7 @@
 # `@guardian/pkgu`
 
+[![npm (scoped)](https://img.shields.io/npm/v/@guardian/pkgu)](https://www.npmjs.com/package/@guardian/pkgu)
+
 > Automatically build `@guardian` packages for publishing to NPM inline with [our recommendations](https://github.com/guardian/recommendations/blob/master/npm-packages.md).
 
 ## Installation

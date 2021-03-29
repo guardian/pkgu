@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-rm -rf .test
-
 echo ""
 echo "Compiling the project..."
 yarn -s build

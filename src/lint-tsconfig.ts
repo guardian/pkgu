@@ -1,8 +1,8 @@
 import type { TsConfigJson } from 'type-fest';
-import { getUserFiles } from './user-files';
 import { warn } from './utils/log';
+import { getUserFiles } from './utils/user-files';
 
-export const verifyTsConfig = () => {
+export const lintTsConfig = () => {
 	const { tsConfig } = getUserFiles();
 	const { compilerOptions } = tsConfig;
 
@@ -27,8 +27,9 @@ export const verifyTsConfig = () => {
 			warn(
 				`\nThe following compilerOptions are not needed in your tsconfig.json:\n  - ${presentButUnneededFields.join(
 					'\n  - ',
-				)}`,
+				)}\n`,
 			);
+			process.exit();
 		}
 	}
 };

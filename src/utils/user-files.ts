@@ -1,7 +1,6 @@
 import path from 'path';
 import pkgDir from 'pkg-dir';
 import type { PackageJson, TsConfigJson } from 'type-fest';
-import { error } from './utils/log';
 
 let projectRoot: string | undefined;
 let pkg: PackageJson | undefined;
@@ -15,8 +14,7 @@ export const getUserFiles = (): {
 	projectRoot ||= pkgDir.sync();
 
 	if (!projectRoot) {
-		error('Cannot find package.json');
-		process.exit(1);
+		throw new Error('Cannot find package.json');
 	}
 
 	pkg ||= require(path.resolve(projectRoot, 'package.json')) as PackageJson;
@@ -27,8 +25,7 @@ export const getUserFiles = (): {
 			'tsconfig.json',
 		)) as TsConfigJson;
 	} catch (e) {
-		error('Cannot find tsconfig.json');
-		process.exit(1);
+		throw new Error('Cannot find tsconfig.json');
 	}
 
 	return { pkg, projectRoot, tsConfig };

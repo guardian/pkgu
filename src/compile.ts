@@ -1,6 +1,6 @@
 import execa from 'execa';
-import { getUserFiles } from './user-files';
 import { info } from './utils/log';
+import { getUserFiles } from './utils/user-files';
 
 const { projectRoot } = getUserFiles();
 
@@ -13,17 +13,16 @@ const defaultConfig = {
 	noEmit: false,
 };
 
-const tsc = (opts: Record<string, unknown>) =>
-	execa(
-		'tsc',
-		Object.entries({ ...defaultConfig, ...opts }).flatMap(([opt, val]) => [
-			`--${opt}`,
-			String(val),
-		]),
-	);
+const optsToArgs = (opts: Record<string, unknown>) =>
+	Object.entries({ ...defaultConfig, ...opts }).flatMap(([opt, val]) => [
+		`--${opt}`,
+		String(val),
+	]);
+
+const tsc = (opts: Record<string, unknown>) => execa('tsc', optsToArgs(opts));
 
 export const compile = () => {
-	info('Compiling source code');
+	// info('Compiling source code');
 
 	return Promise.all([
 		tsc({

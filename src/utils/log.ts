@@ -3,7 +3,7 @@ import chalk from 'chalk';
 let count = 1;
 
 export const error = (message: string): void => {
-	console.error(chalk.bgRed.black(message));
+	console.error(chalk.red(message));
 };
 
 export const info = (message: string): void => {

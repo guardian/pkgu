@@ -1,7 +1,6 @@
 import path from 'path';
 import execa from 'execa';
-import { getUserFiles } from './user-files';
-import { error, info } from './utils/log';
+import { getUserFiles } from './utils/user-files';
 
 const { pkg, projectRoot } = getUserFiles();
 
@@ -13,7 +12,6 @@ export const makeBinExecutable = async (): Promise<void> => {
 	const { bin } = pkg;
 
 	if (bin) {
-		info(`Making bin files executable`);
 		try {
 			if (typeof bin === 'string') {
 				await makeExecutable(bin);
@@ -25,12 +23,11 @@ export const makeBinExecutable = async (): Promise<void> => {
 				);
 			}
 		} catch (e) {
-			error(
+			throw new Error(
 				`Could not make ${JSON.stringify(
 					bin,
 				)} executable. Check the file(s) exist.`,
 			);
-			process.exit(1);
 		}
 	}
 };

@@ -1,32 +1,57 @@
 #!/usr/bin/env node
 
-import updateNotifier from 'update-notifier';
-import type { Package } from 'update-notifier';
+import Listr from 'listr';
+import sade from 'sade';
 import { compile } from './compile';
+import { lintPackage } from './lint-package';
+import { lintTsConfig } from './lint-tsconfig';
 import { makeBinExecutable } from './make-bin-executable';
-import { getUserFiles } from './user-files';
-import { info } from './utils/log';
+import { updateCheck } from './update-check';
+import { pkg } from './utils/package-files';
+import { getUserFiles } from './utils/user-files';
 import { verifyPackage } from './verify-package';
-import { verifyTsConfig } from './verify-tsconfig';
 
-const { pkg } = getUserFiles();
+const app = sade('pkg');
 
-// checks for updated version of this package every time it's run
-// the previous result is used in the current run i.e. it doesn't block while making the check
-updateNotifier({
-	pkg: pkg as Package,
-	shouldNotifyInNpmScript: true,
-	updateCheckInterval: 0,
-}).notify({
-	isGlobal: false,
-	defer: false,
-});
+app.version(pkg.version as string);
 
-void (async () => {
-	await compile();
-	await verifyPackage();
-	await makeBinExecutable();
-	info('Done');
+app.command('build')
+	.describe(
+		'Compiles your src directory to ./dist, ready for publishing. Automatically handles creating ESM, CommonJS and types.',
+	)
+	.action(() => {
+		const tasks = new Listr([
+			{
+				title: 'Check for updates',
+				task: () => updateCheck(),
+				skip: () => 'not published yet',
+			},
+			{
+				title: 'Verify package.json',
+				task: () => lintPackage(),
+			},
+			{
+				title: 'Verify tsconfig.json',
+				task: () => lintTsConfig(),
+			},
+			{
+				title: 'Compile source code',
+				task: () => compile(),
+			},
+			{
+				title: 'Verify package',
+				task: () => verifyPackage(),
+			},
+			{
+				title: 'Create executables',
+				task: () => makeBinExecutable(),
+				enabled: () => Boolean(getUserFiles().pkg.bin),
+			},
+		]);
 
-	verifyTsConfig();
-})();
+		tasks.run().catch(() => {
+			// do nothing - listr displays errors
+		});
+	});
+
+app.parse(process.argv);

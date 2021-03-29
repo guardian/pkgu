@@ -19,9 +19,8 @@
   ],
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "ts-node src/index.ts",
+    "build": "ts-node src/index.ts build",
     "lint": "eslint .",
-    "prerelease": "yarn build build",
     "release": "np",
     "pretest": "rm -rf dist .test",
     "test": "./script/test.sh"

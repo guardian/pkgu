@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import chalk from 'chalk';
 import Listr from 'listr';
 import sade from 'sade';
 import { compile } from './compile';
@@ -48,9 +49,19 @@ app.command('build')
 			},
 		]);
 
-		tasks.run().catch(() => {
-			// do nothing - listr displays errors
-		});
+		tasks
+			.run()
+			.then(() =>
+				console.log(
+					chalk.green(
+						'The builds are identical. The project builds itself correctly.',
+					),
+				),
+			)
+			.catch((e) => {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- it's fine
+				console.log(chalk.red('Build failed')), console.log(e.stdout);
+			});
 	});
 
 app.parse(process.argv);

@@ -51,16 +51,9 @@ app.command('build')
 
 		tasks
 			.run()
-			.then(() =>
-				console.log(
-					chalk.green(
-						'The builds are identical. The project builds itself correctly.',
-					),
-				),
-			)
+			.then(() => console.log(chalk.green('Build succesful.')))
 			.catch((e) => {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- it's fine
-				console.log(chalk.red('Build failed')), console.log(e.stdout);
+				console.log(chalk.red('Build failed')), console.log(e);
 			});
 	});
 

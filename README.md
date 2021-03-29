@@ -41,4 +41,5 @@ You should then be good to publish.
 ## Requirements
 
 -   Your source code is written in TypeScript.
--   The source code lives in `src`.
+-   The source code lives in a directory called `src` at the package root level.
+-   There is one entry point: `src/index.ts`.

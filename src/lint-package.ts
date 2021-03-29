@@ -1,8 +1,9 @@
-import type { PackageJson } from 'type-fest';
-import { sortPackage } from './sort-package';
+import fs from 'fs';
+import prettier from 'prettier';
+import sortPackageJson from 'sort-package-json';
 import { getUserFiles } from './utils/user-files';
 
-export const lintPackage = async () => {
+export const lintPackage = () => {
 	const { pkg } = getUserFiles();
 
 	if (
@@ -16,19 +17,19 @@ export const lintPackage = async () => {
 		);
 	}
 
-	const requiredFields: Array<Partial<keyof PackageJson>> = [
-		'main',
-		'module',
-		'types',
-	];
+	pkg.main = 'dist/cjs/index.js';
+	pkg.module = 'dist/esm/index.js';
+	pkg.types = 'dist/types/index.d.ts';
+	pkg.files = ['dist', ...(pkg.files ?? [])];
 
-	requiredFields.forEach((requiredField: Partial<keyof PackageJson>) => {
-		if (!pkg[requiredField]) {
-			throw new Error(
-				`The '${requiredField}' field is missing from your package.json.`,
-			);
-		}
-	});
+	// @ts-expect-error -- this is not meant to exist, so TS is correct,
+	// but we're making sure it's true in the IRL
+	delete pkg.unpkg;
 
-	await sortPackage();
+	fs.writeFileSync(
+		'package.json',
+		prettier.format(JSON.stringify(sortPackageJson(pkg)), {
+			parser: 'json',
+		}),
+	);
 };

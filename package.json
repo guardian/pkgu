@@ -16,9 +16,10 @@
     "prebuild": "rm -rf dist",
     "build": "ts-node src/index.ts",
     "lint": "eslint .",
+    "prerelease": "yarn build build",
+    "release": "np",
     "pretest": "rm -rf dist .test",
-    "test": "./script/test.sh",
-    "release": "np"
+    "test": "./script/test.sh"
   },
   "prettier": "@guardian/prettier",
   "dependencies": {

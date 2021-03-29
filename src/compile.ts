@@ -1,5 +1,4 @@
 import execa from 'execa';
-import { info } from './utils/log';
 import { getUserFiles } from './utils/user-files';
 
 const { projectRoot } = getUserFiles();

@@ -22,9 +22,11 @@ export const lintPackage = () => {
 	pkg.types = 'dist/types/index.d.ts';
 	pkg.files = ['dist', ...(pkg.files ?? [])];
 
-	// @ts-expect-error -- this is not meant to exist, so TS is correct,
-	// but we're making sure it's true in the IRL
+	// @ts-expect-error -- shouldn't be there
 	delete pkg.unpkg;
+
+	// @ts-expect-error -- shouldn't be there
+	delete pkg.source;
 
 	fs.writeFileSync(
 		'package.json',

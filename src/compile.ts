@@ -20,10 +20,8 @@ const optsToArgs = (opts: Record<string, unknown>) =>
 
 const tsc = (opts: Record<string, unknown>) => execa('tsc', optsToArgs(opts));
 
-export const compile = () => {
-	// info('Compiling source code');
-
-	return Promise.all([
+export const compile = () =>
+	Promise.all([
 		tsc({
 			module: 'ES2020',
 			target: 'ES2020',
@@ -31,7 +29,7 @@ export const compile = () => {
 		}),
 		tsc({
 			module: 'commonjs',
-			target: 'ES2018',
+			target: 'ES2018', // Node 10
 			outDir: 'dist/cjs',
 
 			// no point building these again
@@ -40,4 +38,3 @@ export const compile = () => {
 			declarationMap: false,
 		}),
 	]);
-};

@@ -20,7 +20,13 @@ npm install -D @guardian/pkgu
 
 ## Usage
 
-`@guardian/pkgu` installs a CLI tool called `pkgu` that you can use to create your build:
+`@guardian/pkgu` installs a CLI tool called `pkgu` that you can use to create your build.
+
+### Commands
+
+#### `build`
+
+##### Example
 
 ```js
 // package.json
@@ -34,19 +40,15 @@ npm install -D @guardian/pkgu
 }
 ```
 
-Then run `yarn build`/`npm run build`.
+This will compile your project to a `dist` directory ready for publishing, performing the following steps:
 
-First, it will lint your `package.json` and `tsconfig.json` files and update/add/remove any fields as necessary.
-
-Second, it will compile 3 versions of your project:
-
-1. CommonJS version targetting ES2018 (for Node 10+)
-2. ESM version targetting ES2020 for use by bundlers (see [Using `@guardian` NPM packages](https://github.com/guardian/recommendations/blob/master/npm-packages.md#using-guardian-npm-packages) in the recommendations for more info)
-3. TypeScript declaration files
-
-Third, it will check that the build artefacts match the `package.json` config.
-
-Finally, if your package provides a CLI it will set the permissions needed to make it executable.
+1. Lint your `package.json` and `tsconfig.json` files and update/add/remove any fields as necessary.
+2. Compile 3 versions of your project:
+    1. CommonJS version targetting ES2018 (for Node 10+).
+    2. ESM version targetting ES2020 for use by bundlers (see [Using `@guardian` NPM packages](https://github.com/guardian/recommendations/blob/master/npm-packages.md#using-guardian-npm-packages) in the recommendations for more info).
+    3. TypeScript declaration files.
+3. Check that the build artefacts match the `package.json` config.
+4. If your package provides a CLI it will set the permissions needed to make it executable.
 
 You should then be good to publish.
 

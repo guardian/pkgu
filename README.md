@@ -34,7 +34,19 @@ npm install -D @guardian/pkgu
 }
 ```
 
-Then run `yarn build`/`npm run build` and fix anything that `pkgu` prompts you to until it builds successfully.
+Then run `yarn build`/`npm run build`.
+
+First, it will lint your `package.json` and `tsconfig.json` files and update/add/remove any fields as necessary.
+
+Second, it will compile 3 versions of your project:
+
+1. CommonJS version targetting ES2018 (for Node 10+)
+2. ESM version targetting ES2020 for use by bundlers (see [Using `@guardian` NPM packages](https://github.com/guardian/recommendations/blob/master/npm-packages.md#using-guardian-npm-packages) in the recommendations for more info)
+3. TypeScript declaration files
+
+Third, it will check that the build artefacts match the `package.json` config.
+
+Finally, if your package provides a CLI it will set the permissions needed to make it executable.
 
 You should then be good to publish.
 

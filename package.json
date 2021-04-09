@@ -30,7 +30,7 @@
     "prettier": "^2.2.1",
     "read-pkg-up": "^7.0.1",
     "sade": "^1.7.4",
-    "sort-package-json": "1.48.1"
+    "sort-package-json": "1.49.0"
   },
   "devDependencies": {
     "@guardian/eslint-config-typescript": "^0.5.0",

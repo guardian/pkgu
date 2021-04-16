@@ -13,7 +13,7 @@
   "files": ["dist"],
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "ts-node src/index.ts build",
+    "build": "ts-node --compiler-options='{\"module\":\"commonJS\"}' src/index.ts build",
     "lint": "eslint .",
     "release": "np",
     "test": "node script/test.js"

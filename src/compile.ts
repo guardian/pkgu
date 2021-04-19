@@ -1,4 +1,5 @@
 import execa from 'execa';
+import { config } from './utils/config';
 import { getUserFiles } from './utils/user-files';
 
 const { projectRoot } = getUserFiles();
@@ -11,9 +12,8 @@ const tsc = (opts: Record<string, unknown>) => execa('tsc', optsToArgs(opts));
 export const compile = () =>
 	Promise.all([
 		tsc({
+			...config.esm,
 			project: projectRoot,
-			module: 'ES2020',
-			target: 'ES2020',
 			outDir: 'dist/esm',
 			noEmit: false,
 			declaration: true,
@@ -22,9 +22,8 @@ export const compile = () =>
 			emitDeclarationOnly: false,
 		}),
 		tsc({
+			...config.cjs,
 			project: projectRoot,
-			module: 'commonjs',
-			target: 'ES2018', // Node 10
 			outDir: 'dist/cjs',
 			noEmit: false,
 			declaration: false,

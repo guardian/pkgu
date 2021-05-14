@@ -2,7 +2,7 @@ import pathExists from 'path-exists';
 import type { PackageJson } from 'type-fest';
 import { getUserFiles } from './utils/user-files';
 
-export const verifyPackage = () => {
+export const verifyCompiledPackage = () => {
 	const { pkg } = getUserFiles();
 
 	const fields: Array<Partial<keyof PackageJson>> = [

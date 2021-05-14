@@ -4,7 +4,7 @@ import sortKeys from 'sort-keys';
 import { config } from './utils/config';
 import { getUserFiles } from './utils/user-files';
 
-export const lintTsConfig = () => {
+export const verifyTsconfig = () => {
 	const { tsConfig } = getUserFiles();
 	const { compilerOptions } = tsConfig;
 

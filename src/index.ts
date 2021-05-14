@@ -3,14 +3,14 @@
 import chalk from 'chalk';
 import Listr from 'listr';
 import sade from 'sade';
+import { checkForUpdates } from './check-for-updates';
 import { compile } from './compile';
-import { lintPackage } from './lint-package';
-import { lintTsConfig } from './lint-tsconfig';
 import { makeBinExecutable } from './make-bin-executable';
-import { updateCheck } from './update-check';
 import { pkg } from './utils/package-files';
 import { getUserFiles } from './utils/user-files';
-import { verifyPackage } from './verify-package';
+import { verifyCompiledPackage } from './verify-compiled-package';
+import { verifyPackageJson } from './verify-package-json';
+import { verifyTsconfig } from './verify-tsconfig';
 
 const app = sade('pkg');
 
@@ -24,23 +24,23 @@ app.command('build')
 		const tasks = new Listr([
 			{
 				title: 'Check for updates',
-				task: () => updateCheck(),
+				task: (ctx, task) => checkForUpdates(ctx, task),
 			},
 			{
 				title: 'Verify package.json',
-				task: () => lintPackage(),
+				task: () => verifyPackageJson(),
 			},
 			{
 				title: 'Verify tsconfig.json',
-				task: () => lintTsConfig(),
+				task: () => verifyTsconfig(),
 			},
 			{
 				title: 'Compile source code',
 				task: () => compile(),
 			},
 			{
-				title: 'Verify package',
-				task: () => verifyPackage(),
+				title: 'Verify compiled package',
+				task: () => verifyCompiledPackage(),
 			},
 			{
 				title: 'Create executables',

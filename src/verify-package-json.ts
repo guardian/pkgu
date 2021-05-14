@@ -1,9 +1,8 @@
 import fs from 'fs';
-import prettier from 'prettier';
 import sortPackageJson from 'sort-package-json';
 import { getUserFiles } from './utils/user-files';
 
-export const lintPackage = () => {
+export const verifyPackageJson = () => {
 	const { pkg } = getUserFiles();
 
 	if (
@@ -13,7 +12,7 @@ export const lintPackage = () => {
 		)
 	) {
 		throw new Error(
-			'@guardian packages can not be declared as dependencies. Use peerDependencies instead.',
+			'@guardian packages should not be declared as dependencies. Use peerDependencies instead.',
 		);
 	}
 
@@ -30,8 +29,6 @@ export const lintPackage = () => {
 
 	fs.writeFileSync(
 		'package.json',
-		prettier.format(JSON.stringify(sortPackageJson(pkg)), {
-			parser: 'json',
-		}),
+		JSON.stringify(sortPackageJson(pkg), null, 2) + '\n',
 	);
 };

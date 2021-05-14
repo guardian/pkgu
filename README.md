@@ -2,6 +2,10 @@
 
 [![npm (scoped)](https://img.shields.io/npm/v/@guardian/pkgu)](https://www.npmjs.com/package/@guardian/pkgu)
 
+
+<img src="https://user-images.githubusercontent.com/867233/118273242-9f558c80-b4bb-11eb-92f5-d1c2b9b8079b.png" height="191" alt="pikachu box">
+
+
 > Automatically build `@guardian` packages for publishing to NPM inline with [our recommendations](https://github.com/guardian/recommendations/blob/master/npm-packages.md).
 
 ## Installation

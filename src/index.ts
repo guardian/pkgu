@@ -51,9 +51,9 @@ app.command('build')
 
 		tasks
 			.run()
-			.then(() => console.log(chalk.green('Build succesful.')))
-			.catch((e) => {
-				console.log(chalk.red('Build failed')), console.log(e);
+			.then(() => console.log(chalk.green('Build successful.')))
+			.catch(() => {
+				process.exit(1);
 			});
 	});
 

@@ -1,6 +1,6 @@
 {
 	"extends": "@guardian/eslint-config",
-	"ignorePatterns": ["dist", "script"],
+	"ignorePatterns": ["dist"],
 	"overrides": [
 		{
 			"files": ["*.ts"],

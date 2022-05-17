@@ -16,9 +16,9 @@ export const verifyPackageJson = () => {
 		);
 	}
 
-	pkg.main = 'dist/cjs/index.js';
-	pkg.module = 'dist/esm/index.js';
-	pkg.types = 'dist/types/index.d.ts';
+	pkg.main = 'dist/cjs/src/index.js';
+	pkg.module = 'dist/esm/src/index.js';
+	pkg.types = 'dist/types/src/index.d.ts';
 	pkg.files = ['dist', ...(pkg.files ?? [])];
 
 	// @ts-expect-error -- shouldn't be there

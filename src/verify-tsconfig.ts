@@ -1,5 +1,5 @@
 import fs from 'fs';
-import prettier from 'prettier';
+import { format } from 'prettier';
 import sortKeys from 'sort-keys';
 import { config } from './utils/config';
 import { getUserFiles } from './utils/user-files';
@@ -23,7 +23,7 @@ export const verifyTsconfig = () => {
 
 		fs.writeFileSync(
 			'tsconfig.json',
-			prettier.format(
+			format(
 				JSON.stringify({ ...tsConfig, compilerOptions: fixedOptions }),
 				{
 					parser: 'json',

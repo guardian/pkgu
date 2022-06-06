@@ -1,6 +1,6 @@
-import chalk from 'chalk';
-import execa from 'execa';
-import Listr from 'listr';
+const chalk = require('chalk');
+const execa = require('execa');
+const Listr = require('listr');
 
 const tasks = new Listr([
 	{
@@ -31,10 +31,6 @@ const tasks = new Listr([
 	},
 ]);
 
-interface BuildError {
-	stdout: string;
-}
-
 tasks
 	.run()
 	.then(() =>
@@ -44,11 +40,11 @@ tasks
 			),
 		),
 	)
-	.catch((e: BuildError) => {
+	.catch((e) => {
 		console.log(
 			chalk.red(
 				'The builds are not identical. The project does not build itself correctly.',
 			),
-		);
-		console.log(e.stdout);
+		),
+			console.log(e.stdout);
 	});

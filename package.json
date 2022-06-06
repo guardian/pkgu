@@ -8,21 +8,21 @@
   },
   "repository": "https://github.com/guardian/pkgu.git",
   "license": "MIT",
-  "main": "dist/cjs/src/index.js",
-  "module": "dist/esm/src/index.js",
-  "types": "dist/types/src/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "bin": {
-    "pkgu": "dist/cjs/src/index.js"
+    "pkgu": "dist/cjs/index.js"
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "ts-node src/index.ts build",
+    "build": "ts-node --compiler-options='{\"module\":\"commonJS\"}' src/index.ts build",
     "lint": "eslint .",
     "release": "np",
-    "test": "ts-node script/test.ts"
+    "test": "node script/test.js"
   },
   "prettier": "@guardian/prettier",
   "dependencies": {

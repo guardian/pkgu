@@ -6,10 +6,10 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "noEmit": true,
+    "rootDir": "src",
     "strict": true,
     "target": "ES2020"
   },
-  "include": ["src", "script"],
-  "exclude": ["node_modules", "dist", "coverage"],
-  "ts-node": { "compilerOptions": { "module": "commonjs" } }
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "coverage"]
 }

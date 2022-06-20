@@ -1,5 +1,9 @@
 {
 	"extends": "@guardian/eslint-config",
+	"parserOptions": {
+		"ecmaVersion": 2020
+	},
+
 	"ignorePatterns": ["dist"],
 	"overrides": [
 		{

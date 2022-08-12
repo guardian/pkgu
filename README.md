@@ -1,3 +1,5 @@
+_This is now archived. It didn't prove useful enough to maintain (almost no one is using it). If anyone ever wants to unarchive it, go for it!_
+
 # `@guardian/pkgu`
 
 <img src="https://user-images.githubusercontent.com/867233/118273242-9f558c80-b4bb-11eb-92f5-d1c2b9b8079b.png" height="191" alt="pikachu box">
